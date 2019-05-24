@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="ISO-8859-1"/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Car Rental</title>
+    <link rel="icon" href="https://image.flaticon.com/icons/svg/174/174855.svg">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+          integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" th:href="@{webjars/bootstrap/4.3.1/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" th:href="@{/css/main.css}"/>
+    <link rel="stylesheet" th:href="@{/css/style.css}"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--=== Favicon ===-->
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+
+    <title>Cardoor - Car Rental HTML Template</title>
+
+    <!--=== Bootstrap CSS ===-->
+    <link href="../static/assets/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <!--=== Vegas Min CSS ===-->
+    <link href="../static/assets/css/plugins/vegas.min.css" th:href="@{/css/plugins/vegas.min.css}" rel="stylesheet">
+    <!--=== Slicknav CSS ===-->
+    <link href="../static/assets/css/plugins/slicknav.min.css" th:href="@{/css/plugins/slicknav.min.css}"
+          rel="stylesheet">
+    <!--=== Magnific Popup CSS ===-->
+    <link href="../static/assets/css/plugins/magnific-popup.css" th:href="@{/css/plugins/magnific-popup.css}"
+          rel="stylesheet">
+    <!--=== Owl Carousel CSS ===-->
+    <link href="../static/assets/css/plugins/owl.carousel.min.css" th:href="@{/css/plugins/owl.carousel.min.css}"
+          rel="stylesheet">
+    <!--=== Gijgo CSS ===-->
+    <link href="../static/assets/css/plugins/gijgo.css" th:href="@{/css/plugins/gijgo.css}" rel="stylesheet">
+    <!--=== FontAwesome CSS ===-->
+    <link href="../static/assets/css/font-awesome.css" th:href="@{/css/font-awesome.css}" rel="stylesheet">
+    <!--=== Theme Reset CSS ===-->
+    <link href="../static/assets/css/reset.css" th:href="@{/css/reset.css}" rel="stylesheet">
+    <!--=== Main Style CSS ===-->
+    <link href="../static/assets/css/style.css" th:href="@{/css/style.css}" rel="stylesheet">
+    <!--=== Responsive CSS ===-->
+    <link href="../static/assets/css/responsive.css" th:href="@{/css/responsive.css}" rel="stylesheet">
+
+
+    <!--[if lt IE 9]>
+    <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<style>
+    #container {
+        height: 400px;
+        min-width: 310px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+</style>
+<body>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+
+
+
+<header>
+
+    <div id="header-bottom">
+        <div class="container">
+            <div class="row">
+                <!--== Logo Start ==-->
+                <div class="col-lg-4">
+                    <a href="/home" class="logo">
+                        <img src="../static/assets/img/logo.png" th:src="@{/img/logo.png}" alt="JSOFT">
+                    </a>
+                </div>
+                <!--== Logo End ==-->
+
+                <!--== Main Menu Start ==-->
+                <div class="col-lg-8 d-none d-xl-block">
+                    <nav class="mainmenu alignright">
+                        <ul>
+                            <li class="active"><a href="/home">Home</a></li>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="/payment">Payment</a></li>
+                            <li><a href="/car">Cars</a>
+                            </li>
+                            <li th:if="${userRole.getRoleId()==1}"><a href="/dashboard">Dashboard</a>
+                                <ul>
+                                    <li><a href="/dashboard">Usa dashboard</a></li>
+                                    <li><a href="/month">Month dashboard</a></li>
+                                    <li><a href="/year">Year dashboard</a></li>
+
+                                </ul>
+                            </li>
+                            <li><a href="/logout">Logout</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <!--== Main Menu End ==-->
+            </div>
+        </div>
+    </div>
+
+</header>
+
+<div id="container" style="height: 400px"></div>
+<script th:inline="javascript">
+    Highcharts.chart('container', {
+        chart: {
+            type: 'column',
+            options3d: {
+                enabled: true,
+                alpha: 10,
+                beta: 25,
+                depth: 70
+            }
+        },
+        title: {
+            text: 'Income per month'
+        },
+        subtitle: {
+            /*text: 'Notice the difference between a 0 value and a null point'*/
+        },
+        plotOptions: {
+            column: {
+                depth: 25
+            }
+        },
+        xAxis: {
+            categories: [[${surveyMap.keySet()}]],
+            labels: {
+                skew3d: true,
+                style: {
+                    fontSize: '16px'
+                }
+            }
+        },
+        yAxis: {
+            title: {
+                text: null
+            }
+        },
+        series: [{
+            name: 'Income',
+            data: [[${surveyMap.values()}]]
+        }]
+    });
+</script>
+</body>
+</html>
